@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Mirror Control Panel - NU CEAT</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with User Info -->
+        <header>
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1>🪞 <span class="maroon-text">NU CEAT</span> <span class="yellow-text">Smart Mirror</span></h1>
+                    <p>Administration Control Panel</p>
+                </div>
+                <div class="user-section">
+                    <div class="user-info">
+                        <span class="user-icon">👤</span>
+                        <span id="username-display">Loading...</span>
+                    </div>
+                    <button id="logout-btn" class="logout-btn">🚪 Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('announcements')">📢 Announcements</button>
+            <button class="tab-btn" onclick="showTab('events')">📅 Calendar Events</button>
+            <button class="tab-btn" onclick="showTab('settings')">⚙️ Settings</button>
+            <button class="tab-btn" onclick="showTab('preview')">👁️ Mirror Preview</button>
+            <button class="tab-btn" onclick="showTab('account')">🔐 Account</button>
+        </div>
+
+        <!-- Announcements Tab -->
+        <div id="announcements-tab" class="tab-content active">
+            <div class="add-form">
+                <h2>➕ Add New Announcement</h2>
+                <form id="announcement-form">
+                    <input type="text" id="ann-title" placeholder="Announcement Title" required>
+                    <textarea id="ann-content" placeholder="Announcement Content" rows="3" required></textarea>
+                    <select id="ann-priority">
+                        <option value="normal">Normal Priority</option>
+                        <option value="high">⚠️ High Priority</option>
+                        <option value="urgent">🚨 Urgent</option>
+                    </select>
+                    <button type="submit">Publish Announcement</button>
+                </form>
+            </div>
+
+            <div class="list-container">
+                <h2>📋 Current Announcements</h2>
+                <div id="announcements-list" class="items-list"></div>
+            </div>
+        </div>
+
+        <!-- Events Tab -->
+        <div id="events-tab" class="tab-content">
+            <div class="add-form">
+                <h2>➕ Add Calendar Event</h2>
+                <form id="event-form">
+                    <input type="text" id="event-title" placeholder="Event Title" required>
+                    <input type="datetime-local" id="event-date" required>
+                    <textarea id="event-desc" placeholder="Event Description (optional)" rows="2"></textarea>
+                    <input type="color" id="event-color" value="#c5a059">
+                    <button type="submit">Add Event</button>
+                </form>
+            </div>
+
+            <div class="list-container">
+                <h2>📅 Upcoming Events</h2>
+                <div id="events-list" class="items-list"></div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings-tab" class="tab-content">
+            <div class="settings-section">
+                <h2>📆 Calendar Settings</h2>
+                <form id="calendar-settings-form">
+                    <label>Google Calendar URL:</label>
+                    <input type="text" id="calendar-url" placeholder="https://calendar.google.com/calendar/ical/...">
+                    <label>Calendar Name:</label>
+                    <input type="text" id="calendar-name" placeholder="Academic Calendar">
+                    <button type="submit">Update Calendar</button>
+                </form>
+            </div>
+
+            <div class="settings-section">
+                <h2>🔄 Sync Status</h2>
+                <div class="status-card">
+                    <p>🟢 Smart Mirror Status: <span id="mirror-status">Connected</span></p>
+                    <p>📡 Last Update: <span id="last-update">Just now</span></p>
+                    <p>👑 Logged in as: <span id="logged-in-user">Admin</span></p>
+                    <button onclick="refreshData()">⟳ Refresh Data</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Tab -->
+        <div id="preview-tab" class="tab-content">
+            <div class="mirror-preview">
+                <div class="preview-header">
+                    <h2>🪞 Live Mirror Preview</h2>
+                    <p class="preview-note">This is how announcements appear on the Smart Mirror</p>
+                </div>
+                <div id="preview-announcements" class="preview-announcements"></div>
+                <div id="preview-events" class="preview-events"></div>
+            </div>
+        </div>
+
+        <!-- Account Tab -->
+        <div id="account-tab" class="tab-content">
+            <div class="settings-section">
+                <h2>🔐 Change Password</h2>
+                <form id="change-password-form">
+                    <label>Current Password:</label>
+                    <input type="password" id="current-password" required>
+                    <label>New Password:</label>
+                    <input type="password" id="new-password" required>
+                    <label>Confirm New Password:</label>
+                    <input type="password" id="confirm-new-password" required>
+                    <button type="submit">Update Password</button>
+                </form>
+            </div>
+            
+            <div class="settings-section">
+                <h2>ℹ️ Account Information</h2>
+                <div class="status-card">
+                    <p>👤 Username: <span id="account-username">-</span></p>
+                    <p>👑 Role: <span id="account-role">-</span></p>
+                    <p>📅 Member since: <span id="account-created">-</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

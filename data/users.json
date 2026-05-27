@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1779890793923,
+    "username": "marden",
+    "password": "$2b$10$gMcnJpkKS6dbNC.RtjZiTuehbQL.vm42qdlwPcSm8TERdDnIRgXUS",
+    "role": "user",
+    "createdAt": "2026-05-27T14:06:33.923Z"
+  },
+  {
+    "id": 1779890861796,
+    "username": "Marden",
+    "password": "$2b$10$zH13JhzKa56MgWnsg/HYBOf4gd4lLmDc/qPDB5DXcAMbSIJ7Py5qu",
+    "role": "user",
+    "createdAt": "2026-05-27T14:07:41.796Z"
+  }
+]
